@@ -1,0 +1,20 @@
+const help = require('../../models/helpandsupportforhero')
+
+
+
+exports.getterms = async(req,res) => {
+    try {
+        const data = await help.find();
+        console.log(data);
+        res.status(200).json({
+            terms : data[0]
+        })
+        
+    }catch(err)
+    {  
+        res.status(400).send({mesage : err.mesage});
+    }
+}
+
+
+
