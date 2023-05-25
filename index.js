@@ -1,12 +1,14 @@
 const express = require("express");
-const mongoose = require("mongoose");
+const mongoose = require("mongoose");  
 const cors = require("cors");
 const multer = require("multer");
 const app = express();
 const bodyparser = require("body-parser");
+const serverless = require('serverless-http')
 const userRouter = require("./routes/userroutes");
 const serviceRouter = require("./routes/services");
 const categoryRouter = require("./routes/category");
+const combinedservicesAndcategoryRouter = require("./routes/combinedservicesAndcategory");
 const bookingRouter = require("./routes/bookings");
 const heroRouter = require("./routes/hero");
 const walletRouter = require("./routes/wallet");
@@ -19,7 +21,14 @@ const helpandsupportRouter = require("./routes/helpandsupportforhero");
 const blockuserRouter = require("./routes/blockuser");
 const adminmodelRouter = require("./routes/admin-model");
 const projectListRouter = require("./routes/projectList");
-const multerRouter=require("./routes/banner")
+const userBannerRouter=require("./routes/banner user")
+const heroBannerRouter=require("./routes/banner hero")
+const coupencodeRouter=require("./routes/coupencode")
+const notificationRouter=require("./routes/notification")
+const cityRouter=require("./routes/city")
+const paymentRouter=require("./routes/payment")
+const revenue = require("./routes/revenue")
+
 
 // app.use(multer().any())
 //const route=require('./routes/banner')
@@ -44,6 +53,7 @@ mongoose
 app.use("/api", userRouter);
 app.use("/api/services", serviceRouter);
 app.use("/api/categorys", categoryRouter);
+app.use("/api/combinedservicesAndcategoryRouter", combinedservicesAndcategoryRouter);
 app.use("/api/heros", heroRouter);
 app.use("/api/bookings", bookingRouter);
 app.use("/api/wallet", walletRouter);
@@ -56,27 +66,32 @@ app.use("/api/helpandsupportRouter", helpandsupportRouter);
 app.use("/blockuserRouter", blockuserRouter);
 app.use("/adminmodelRouter", adminmodelRouter);
 app.use("/projectListRouter", projectListRouter);
-app.use("/multerRouter",multerRouter)
-//app.use('/',route)
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, "Images");
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + "-" + Date.now() + ".jpg, .jpeg, .png,.pdf");
-    },
-  }),
-}).single("image");
-app.post("/upload", upload, (req, res) => {
-  res.send("file upload");
-});
-app.get("/upload1", upload, (req, res) => {
-  res.send("file upload1");
-});
-app.delete("/upload2", upload, (req, res) => {
-  res.send("file upload2");
-});
+app.use("/userBannerRouter",userBannerRouter)
+app.use("/heroBannerRouter",heroBannerRouter)
+app.use("/coupencodeRouter",coupencodeRouter)
+app.use("/notificationRouter",notificationRouter)
+app.use("/cityRouter",cityRouter)
+app.use("/paymentRouter",paymentRouter)
+app.use("/revenue",revenue)
+
+
+function errorHandler(err, req, res, next) {
+  console.error(err.stack); // log the error to the console
+
+  // check if the error has a custom message
+  const errorMessage = err.message || "Something went wrong!";
+
+  // send an error response to the client with the custom message
+  res.status(500).json({ message: errorMessage });
+}
+module.exports = errorHandler;
+
+
+
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
+
+module.exports = {
+  handler: serverless(app)
+}

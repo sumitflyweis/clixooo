@@ -11,6 +11,8 @@ termsRouter.post('/terms',   terms.addterms);
 termsRouter.get('/terms1',   terms1.getterms);  
 termsRouter.put('/terms/:id', terms.updateterms);
 termsRouter.delete('/terms/:id', terms.DeleteTerms);
+termsRouter.get('/gettermsbyadmin', terms.gettermsbyadmin);
+
 
 
 module.exports = termsRouter;

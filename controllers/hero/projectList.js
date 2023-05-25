@@ -7,7 +7,7 @@ const bookings = require('../../models/Bookings')
 
 module.exports. getProjects= async(req,res)=>{
     try {
-        const {bookingId,booked}=req.body
+        const {bookingId,booked}=req.params
        
       const book= await bookings.find({_id:bookingId,booked:booked})
 

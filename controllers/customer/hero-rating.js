@@ -9,13 +9,14 @@ exports.addterms = async (req,res) =>{
         
         let hero={}
         if(iduser){
-    const data1=  await userSchema.findOne({_id:iduser,role:"hero"})
-        
+    const data1=  await userSchema.findOne({ $and: [ {_id:iduser }, { role:"hero"}  ] })
+    
+        console.log(data1)
         hero["rating"]=rating
       //  herorating["iduser"]=iduser
         hero["data1"]=data1
         
-         console.log(herorating)
+        // console.log(herorating)
          const data2=await herorating.create(hero)
 
          res.status(200).json({

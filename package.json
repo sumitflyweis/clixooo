@@ -10,16 +10,28 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.1.0",
+    "@aws-sdk/client-s3": "^3.327.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.1",
+    "cloudinary": "^1.36.2",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.4",
     "mongoose": "^6.5.3",
     "multer": "^1.4.5-lts.1",
+    "multer-s3": "^3.0.1",
+    "multer-storage-cloudinary": "^4.0.0",
     "nodemon": "^2.0.20",
-    "shortid": "^2.2.16"
+    "otp-generators": "^1.0.3",
+    "razorpay": "^2.8.4",
+    "serverless-dotenv-plugin": "^6.0.0",
+    "serverless-http": "^3.2.0",
+    "serverless-offline": "^12.0.4",
+    "shortid": "^2.2.16",
+    "uuid": "^9.0.0",
+    "uuidv4": "^6.2.13"
   }
 }

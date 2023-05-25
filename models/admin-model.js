@@ -9,6 +9,9 @@ const AdminSchema   = mongoose.Schema({
         type: String,
         unique: true
     }, 
+    phoneNumber:{
+        type:String
+    },
     password: {
         type: String, 
 

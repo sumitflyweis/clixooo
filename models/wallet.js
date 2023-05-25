@@ -6,12 +6,21 @@ const walletSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.ObjectId,
       ref: "user",
-      unique: true,    
-      required: true,
+      required:false
+      // unique: false 
     },
     
+    hero: {
+      type: mongoose.Schema.ObjectId,
+      ref: "hero",
+      required:false
+      // unique: false
+    },
     
-    balance: { type: String, default: 0 },
+   balance:{ type: Number, default: 0 },
+   addbalance: { type: Number, default: 0 },
+   removebalance: { type: Number, default: 0 },
+  
   },
   { timestamps: true }
 );

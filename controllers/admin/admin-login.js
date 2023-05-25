@@ -1,4 +1,4 @@
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 const path = require('path'); 
 require('dotenv').config()
 const jwt = require('jsonwebtoken');

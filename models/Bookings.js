@@ -1,34 +1,40 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
+const objectid = mongoose.Schema.Types.ObjectId;
+const bookingSchema = mongoose.Schema(
+  {
+    cancellable: { type: Boolean },
+    booked: { type: Boolean },
+    userId: { type: objectid, ref: "user" },
+    userobject: { type: Object },
+    location: { type: String },
+    Date: { type: String, default: new Date() },
+    combinedobject: { type: Object },
+    //  heroId: { type: [objectid], ref: "hero" },
+    heroId: { type: objectid, ref: "hero" },
+    heroobject: { type: Object },
+    categoryStatus: { type: String },
+    Time: { type: String },
+    Status: {
+      type: String,
+      default: "pending",
+    },
+    amount: { type: Number, default: 0 },
+    payment: {
+      type: String,
+      enum: ["online", "cash"],
+      default: "online",
+    },
+    service: { type: String },
+    start_time: { type: String },
+    end_time: { type: String },
+    now_schedule: { type: String },
+    rewards: { type: String },
+    timer: { type: String },
+    location: {type: String}
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const bookingSchema = mongoose.Schema({
-
-    // service:{type:mongoose.SchemaTypes.ObjectId, ref:'service'},
-    // bookingid:{type:String},
-
-    // date:{type:Date, require:true},
-
-    // time:{type:String},
-
-    // user:{
-    //     type:mongoose.SchemaTypes.ObjectId,
-    //     ref:'user'
-    // }
-
-    
-    cancellable:{type:Boolean},
-    booked:{type:Boolean},
-   serviceId:{type:mongoose.SchemaTypes.ObjectId,ref:'service'},
-   userId:{type:mongoose.SchemaTypes.ObjectId,ref:'user'},
-   location:{type:String},
-   Date:{type:Date},
-   categoryid:{type:mongoose.SchemaTypes.ObjectId,ref:'category'},
-   heroid:{type:mongoose.SchemaTypes.ObjectId,ref:'hero'},
-   category:{type:String},
-   Time:{type:String},
-   Status:{type:String}
-
-
-
-})
-
-module.exports= mongoose.model('bookings', bookingSchema)
+module.exports = mongoose.model("bookings", bookingSchema);
